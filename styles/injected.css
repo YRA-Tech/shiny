@@ -1,0 +1,111 @@
+/**
+ * Shiny - Injected styles for SVG enhancements
+ */
+
+/* Focus indicators for focusable SVG elements */
+.shiny-focusable:focus {
+  outline: 3px solid #4A90D9 !important;
+  outline-offset: 2px !important;
+}
+
+.shiny-focusable:focus-visible {
+  outline: 3px solid #4A90D9 !important;
+  outline-offset: 2px !important;
+}
+
+/* Ensure focus is visible even in high contrast mode */
+@media (forced-colors: active) {
+  .shiny-focusable:focus,
+  .shiny-focusable:focus-visible {
+    outline: 3px solid CanvasText !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* Highlightable elements - hover and focus effects */
+.shiny-highlightable {
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.shiny-highlightable:hover,
+.shiny-highlightable:focus {
+  filter: brightness(1.2) drop-shadow(0 0 4px var(--shiny-highlight-color, #FFFF00)) !important;
+}
+
+/* Enhanced SVG marker class */
+.shiny-enhanced {
+  /* Smooth transitions for filter changes */
+  transition: filter 0.2s ease;
+}
+
+/* Enhanced img/object SVGs */
+.shiny-enhanced-img {
+  transition: filter 0.2s ease;
+}
+
+/* Outlined shapes */
+.shiny-outlined {
+  /* Ensure outlines render properly */
+  vector-effect: non-scaling-stroke;
+}
+
+/* Animation for newly detected SVGs (optional visual feedback) */
+@keyframes shiny-pulse {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.1);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* Debug mode - show detected SVGs with a subtle border */
+.shiny-debug .shiny-enhanced {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
+}
+
+/* Ensure SVG elements can receive focus properly */
+svg .shiny-focusable {
+  cursor: pointer;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .shiny-highlightable:hover,
+  .shiny-highlightable:focus {
+    filter: brightness(1.4) drop-shadow(0 0 6px var(--shiny-highlight-color, #FFFF00)) !important;
+  }
+}
+
+/* Reduced motion support - disable transitions */
+@media (prefers-reduced-motion: reduce) {
+  .shiny-enhanced,
+  .shiny-enhanced-img,
+  .shiny-highlightable,
+  .shiny-hdr {
+    transition: none !important;
+  }
+}
+
+/* Image HDR enhancement classes */
+.shiny-hdr {
+  transition: filter 0.3s ease;
+}
+
+/* Low intensity HDR - subtle enhancement */
+.shiny-hdr-low {
+  filter: contrast(1.1) saturate(1.15) brightness(1.02) !important;
+}
+
+/* Medium intensity HDR - noticeable enhancement */
+.shiny-hdr-medium {
+  filter: contrast(1.2) saturate(1.3) brightness(1.05) !important;
+}
+
+/* High intensity HDR - dramatic enhancement */
+.shiny-hdr-high {
+  filter: contrast(1.35) saturate(1.5) brightness(1.08) !important;
+}

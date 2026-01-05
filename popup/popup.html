@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shiny - SVG Accessibility</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup-container" role="main">
+    <header>
+      <h1>Shiny</h1>
+      <p class="subtitle">SVG Accessibility Enhancer</p>
+    </header>
+
+    <section class="toggle-section" aria-labelledby="global-toggle-label">
+      <label class="toggle-switch">
+        <input type="checkbox" id="enabled" aria-describedby="enabled-desc">
+        <span class="slider"></span>
+      </label>
+      <span id="global-toggle-label" class="toggle-label">Enable Enhancements</span>
+      <span id="enabled-desc" class="sr-only">Toggle all SVG accessibility enhancements on or off</span>
+    </section>
+
+    <hr>
+
+    <section class="settings-section" aria-labelledby="outline-heading">
+      <h2 id="outline-heading">Outlines</h2>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="outlineEnabled">
+          <span>Add outlines to SVG shapes</span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="outlineColor">Color:</label>
+        <input type="color" id="outlineColor" value="#000000">
+      </div>
+
+      <div class="setting-row">
+        <label for="outlineWidth">Width:</label>
+        <input type="range" id="outlineWidth" min="1" max="5" value="2">
+        <output id="outlineWidthValue" for="outlineWidth">2px</output>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="contrast-heading">
+      <h2 id="contrast-heading">Contrast</h2>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="contrastEnabled">
+          <span>Enhance contrast</span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="contrastLevel">Level:</label>
+        <select id="contrastLevel">
+          <option value="medium">Medium</option>
+          <option value="high" selected>High</option>
+          <option value="maximum">Maximum</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="highlight-heading">
+      <h2 id="highlight-heading">Highlighting</h2>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="highlightEnabled">
+          <span>Highlight interactive elements</span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="highlightColor">Color:</label>
+        <input type="color" id="highlightColor" value="#FFFF00">
+      </div>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="focusIndicators">
+          <span>Show focus indicators</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="settings-section" aria-labelledby="image-hdr-heading">
+      <h2 id="image-hdr-heading">Image HDR</h2>
+
+      <div class="setting-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="imageHdrEnabled">
+          <span>Enhance image &amp; video contrast (HDR)</span>
+        </label>
+      </div>
+
+      <div class="setting-row">
+        <label for="imageHdrIntensity">Intensity:</label>
+        <select id="imageHdrIntensity">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+    </section>
+
+    <footer>
+      <button id="resetBtn" type="button">Reset to Defaults</button>
+      <p class="version">Version 1.0.0</p>
+    </footer>
+  </main>
+
+  <script src="../lib/utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
