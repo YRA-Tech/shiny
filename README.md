@@ -187,3 +187,7 @@ Reload the extension from `chrome://extensions` after editing any file.
 **Settings aren't being saved.** If a selectors textarea is showing a red border, its JSON is invalid and the whole panel refuses to save until it's fixed. Clear the textarea (empty = `[]`) or enter a valid JSON string array.
 
 **The panel shows no "Instructions" / "Jump To" section.** Those sections are hidden unless the current URL matches an entry in `data/instructions.json` / `data/jumplinks.json`. Matching is exact-URL-first, then longest prefix.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
