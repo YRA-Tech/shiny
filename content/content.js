@@ -93,12 +93,30 @@
     },
 
     /**
+     * Is the HDR enhancement in scope for this element?
+     * @param {Element} el
+     * @returns {boolean}
+     */
+    hdrAllows(el) {
+      const scope = this.settings?.imageHdrScope;
+      if (scope === 'all') return true;
+      if (scope === 'none' || !scope) return false;
+      if (scope === 'selectors') {
+        const selectors = this.settings?.imageHdrSelectors || [];
+        for (const sel of selectors) {
+          try {
+            if (el.matches(sel)) return true;
+          } catch { /* invalid selector */ }
+        }
+      }
+      return false;
+    },
+
+    /**
      * Apply HDR effect to all images and videos on the page
      */
     applyImageHdr() {
-      if (!this.settings?.enabled || !this.settings?.imageHdrEnabled) {
-        return;
-      }
+      if (!this.settings?.enabled) return;
 
       document.querySelectorAll('img').forEach(img => {
         this.applyHdrToImage(img);
@@ -114,19 +132,14 @@
      * @param {HTMLImageElement} img - Image element
      */
     applyHdrToImage(img) {
-      if (!this.settings?.enabled || !this.settings?.imageHdrEnabled) {
-        return;
-      }
+      if (!this.settings?.enabled) return;
 
       // Skip SVG images (handled by SVG enhancer)
-      if (img.src?.endsWith('.svg') || img.src?.includes('.svg?')) {
-        return;
-      }
+      if (img.src?.endsWith('.svg') || img.src?.includes('.svg?')) return;
 
-      // Remove any existing HDR classes
+      if (!this.hdrAllows(img)) return;
+
       img.classList.remove('shiny-hdr', 'shiny-hdr-low', 'shiny-hdr-medium', 'shiny-hdr-high');
-
-      // Apply HDR classes
       img.classList.add('shiny-hdr', `shiny-hdr-${this.settings.imageHdrIntensity}`);
     },
 
@@ -135,14 +148,10 @@
      * @param {HTMLVideoElement} video - Video element
      */
     applyHdrToVideo(video) {
-      if (!this.settings?.enabled || !this.settings?.imageHdrEnabled) {
-        return;
-      }
+      if (!this.settings?.enabled) return;
+      if (!this.hdrAllows(video)) return;
 
-      // Remove any existing HDR classes
       video.classList.remove('shiny-hdr', 'shiny-hdr-low', 'shiny-hdr-medium', 'shiny-hdr-high');
-
-      // Apply HDR classes
       video.classList.add('shiny-hdr', `shiny-hdr-${this.settings.imageHdrIntensity}`);
     },
 
@@ -171,7 +180,6 @@
      */
     onSettingsChanged(newSettings) {
       const wasEnabled = this.settings?.enabled;
-      const wasHdrEnabled = this.settings?.imageHdrEnabled;
       this.settings = newSettings;
 
       if (!newSettings.enabled && wasEnabled) {
@@ -179,18 +187,12 @@
         this.enhancer.restoreAll();
         this.removeImageHdr();
       } else if (newSettings.enabled) {
-        // Re-enhance all detected SVGs with new settings
+        // Re-enhance all detected SVGs with new settings (enhancer honors scope/selectors)
         this.reenhanceAll();
 
-        // Handle HDR changes
-        if (newSettings.imageHdrEnabled) {
-          // Remove old HDR classes and reapply with new intensity
-          this.removeImageHdr();
-          this.applyImageHdr();
-        } else if (wasHdrEnabled) {
-          // HDR was disabled
-          this.removeImageHdr();
-        }
+        // HDR: clear then reapply so scope/selector changes take effect correctly
+        this.removeImageHdr();
+        this.applyImageHdr();
       }
     },
 

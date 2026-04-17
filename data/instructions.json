@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://example.com",
+    "text": "Welcome to the Shiny demo. This page contains basic HTML elements. Try enabling outlines and contrast enhancements to see how SVG graphics become more visible."
+  },
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/SVG",
+    "text": "This is the MDN SVG reference. Notice how inline SVG diagrams respond to the outline and contrast settings. Try adjusting the outline width and color to find what works best for you."
+  },
+  {
+    "url": "https://www.w3.org/WAI/",
+    "text": "The W3C Web Accessibility Initiative page. Explore how the extension enhances the various icons and illustrations used throughout this site. Pay attention to the focus indicators on interactive SVG elements."
+  }
+]

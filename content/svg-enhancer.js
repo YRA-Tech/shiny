@@ -9,6 +9,28 @@ class SVGEnhancer {
   }
 
   /**
+   * Is the enhancement in scope for this element?
+   * @param {Element} element - The target (svg/img/object/embed)
+   * @param {string} scope - 'none' | 'all' | 'selectors'
+   * @param {string[]} selectors - CSS selectors when scope === 'selectors'
+   * @returns {boolean}
+   */
+  scopeAllows(element, scope, selectors) {
+    if (scope === 'all') return true;
+    if (scope === 'none') return false;
+    if (scope === 'selectors' && Array.isArray(selectors)) {
+      for (const sel of selectors) {
+        try {
+          if (element.matches(sel)) return true;
+        } catch {
+          // invalid selector — ignore
+        }
+      }
+    }
+    return false;
+  }
+
+  /**
    * Enhance an SVG based on settings
    * @param {Object} svgInfo - SVG info from detector
    * @param {Object} settings - Current settings
@@ -47,21 +69,21 @@ class SVGEnhancer {
     const stored = this.enhancedElements.get(svg);
 
     // Apply outline enhancement
-    if (settings.outlineEnabled) {
+    if (this.scopeAllows(svg, settings.outlineScope, settings.outlineSelectors)) {
       this.addOutlines(svg, settings, stored);
     } else {
       this.removeOutlines(svg, stored);
     }
 
     // Apply contrast enhancement
-    if (settings.contrastEnabled) {
+    if (this.scopeAllows(svg, settings.contrastScope, settings.contrastSelectors)) {
       this.enhanceContrast(svg, settings);
     } else {
       svg.style.filter = stored.originalFilter || '';
     }
 
     // Apply element highlighting
-    if (settings.highlightEnabled) {
+    if (this.scopeAllows(svg, settings.highlightScope, settings.highlightSelectors)) {
       this.addHighlighting(svg, settings);
     } else {
       this.removeHighlighting(svg);
@@ -255,13 +277,13 @@ class SVGEnhancer {
 
     const filters = [];
 
-    if (settings.contrastEnabled) {
+    if (this.scopeAllows(img, settings.contrastScope, settings.contrastSelectors)) {
       const contrastValues = { medium: 1.3, high: 1.6, maximum: 2.0 };
       const contrast = contrastValues[settings.contrastLevel] || 1.6;
       filters.push(`contrast(${contrast})`);
     }
 
-    if (settings.outlineEnabled) {
+    if (this.scopeAllows(img, settings.outlineScope, settings.outlineSelectors)) {
       // Use drop-shadow to simulate outline for img SVGs
       filters.push(`drop-shadow(0 0 ${settings.outlineWidth}px ${settings.outlineColor})`);
     }

@@ -11,7 +11,6 @@
     "<all_urls>"
   ],
   "action": {
-    "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -29,10 +28,17 @@
         "lib/utils.js",
         "content/svg-detector.js",
         "content/svg-enhancer.js",
-        "content/content.js"
+        "content/content.js",
+        "content/floating-panel.js"
       ],
       "css": ["styles/injected.css"],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["data/instructions.json", "data/anchors.json", "data/jumplinks.json"],
+      "matches": ["<all_urls>"]
     }
   ],
   "icons": {

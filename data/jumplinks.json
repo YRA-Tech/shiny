@@ -1,0 +1,24 @@
+[
+  {
+    "url": "https://developer.mozilla.org/en-US/docs/Web/SVG",
+    "links": [
+      {
+        "text": "Jump to SVG tutorials",
+        "lang": "en",
+        "xpath": "//h2[contains(., 'Tutorials')]",
+        "id": "shiny-jump-tutorials"
+      },
+      {
+        "text": "Jump to SVG reference",
+        "lang": "en",
+        "xpath": "//h2[contains(., 'Reference')]",
+        "id": "shiny-jump-reference"
+      },
+      {
+        "text": "MDN home page",
+        "lang": "en",
+        "href": "https://developer.mozilla.org/"
+      }
+    ]
+  }
+]
