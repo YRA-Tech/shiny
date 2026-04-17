@@ -1,6 +1,8 @@
 # Shiny
 
-A Chrome extension that enhances SVG visibility and accessibility for users with low vision and color blindness. Built as a demo for various accessibility features.  In most cases, regular focus styling and image selection techniques may be sufficient. Users who have vision impairments can also use magnification and screen readers to good effect in most cases. However, in some domains the nature of the task, particularly some involving visual information, drawing, protographs, and images, even the existing tools may not be optimal. This extension is intended to offer gap-filling tools for those special subject matter domains. 
+A Chrome extension that demonstrates features (all intended to be opt-in) that enhance SVG visibility, offer extended page descriptions or instructions, and enhance keyboard access. Built as a demo for various accessibility features, which would typically be immplemented in special hard-cases for unusually tricky web content.  
+
+In most cases, regular focus styling and image selection techniques may be sufficient (if WCAG-conformant). Users who have vision impairments can also use magnification and screen readers to good effect in most cases. However, in some domains the nature of the task, particularly some involving visual information, drawing, photographs, and images, even the the best existing tools may not offer the optimal usable experience. This extension is intended to demo offer gap-filling features for those special subject matter domains.  Particularly technical users may find some use in this as a browser extension, but wow I wouldn't bet on it coming up very often.
 
 ## Features
 
